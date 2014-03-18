@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<script type="text/javascript">
+		function fillCanvas(){
+			var mycanvas = document.getElementById("mycanvas");
+			var context2d = mycanvas.getContext('2d');
+			context2d.fillRect(50,25,150,100);
+		}
+	</script>
+	</head>
+<body onload="fillCanvas()">
+<canvas width="500px" height="500px" id="mycanvas">
+</canvas>
+</body >
+</html>
