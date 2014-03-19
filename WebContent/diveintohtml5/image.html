@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>HTML5 Image</title>
+<script type="text/javascript">
+function showImage(){
+	var myCanvas = document.getElementById("mycanvas");
+	var context = myCanvas.getContext("2d");
+	var myPic = document.getElementById("mypic");
+	context.drawImage(myPic, 300,400,400,300, 0,0,500,500);
+}
+
+function showImage2(){
+	var myCanvas = document.getElementById("mycanvas");
+	var context = myCanvas.getContext("2d");
+	var myPic = new Image();
+	myPic.src = "nattu.jpg";
+	myPic.onload = function(){
+		context.drawImage(myPic,300,400,400,300,0,0,400,300);
+	}
+}
+</script>
+</head>
+<body onload="showImage2()">
+<img id="mypic" alt="nattu" src="nattu.jpg" width="200" height="250"></img>
+<canvas id="mycanvas" width="500" height="500" ></canvas>
+</body>
+</html>

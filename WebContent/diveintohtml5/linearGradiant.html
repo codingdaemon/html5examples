@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- 
+Creation Date : 19-Mar-2014 
+Author :nitiraj
+Description : 
+-->
+<html>
+  <head>
+  	<title>html5</title>
+  	<script type="text/javascript">
+  		function initCanvas(){
+  			var myCanvas = document.getElementById("mycanvas");
+  			var context = myCanvas.getContext("2d");
+  			
+  			//var linearGradiant = context.createLinearGradient(0,0,300,0);
+  			
+  			
+  			var linearGradiant = context.createLinearGradient(0,0,0,250);
+  			
+  			linearGradiant.addColorStop(0, "black");
+  			linearGradiant.addColorStop(1, "white");
+  			
+  			context.fillStyle = linearGradiant;
+  			
+  			//context.fillRect(0,0,300,150);
+  			context.fillRect(0, 0, 300, 225);
+  		}
+  	</script>
+  </head>
+  <body onload="initCanvas()">
+    <canvas id="mycanvas" height="500" width="300"></canvas>
+  </body>
+</html>
