@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+Creation Date : 19-Mar-2014
+Author : nitiraj
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML5 Example</title>
+<script type="text/javascript">
+	function draw(){
+		var myCanvas = document.getElementById("mycanvas");
+		var context = myCanvas.getContext("2d");
+		context.beginPath();
+	    context.arc(75,75,50,0,Math.PI*2,true); // Outer circle
+	    //context.moveTo(110,75);
+	    context.lineTo(110,75);
+	    context.arc(75,75,35,0,Math.PI,false);   // Mouth (clockwise)
+	    //context.moveTo(65,65);
+	    context.lineTo(65,65);
+	    context.arc(60,65,5,0,Math.PI*2,true);  // Left eye
+	    //context.moveTo(95,65);
+	    context.lineTo(95,65);
+	    context.arc(90,65,5,0,Math.PI*2,true);  // Right eye
+	    context.stroke();
+	}
+</script>
+</head>
+<body onload="draw()">
+<canvas id="mycanvas" width="500" height="500"></canvas>
+</body>
+</html>
