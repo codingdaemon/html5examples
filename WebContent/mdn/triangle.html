@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- 
+Creation Date : 19-Mar-2014 
+Author :nitiraj
+Description : 
+-->
+<html>
+  <head>
+  	<title>HTML5 triangle</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript">
+    function drawTriangle(){
+    	var myCanvas = document.getElementById("mycanvas");
+    	var context = myCanvas.getContext("2d");
+    	
+    	context.beginPath();
+    	context.moveTo(50,50);
+    	context.lineTo(75,75);
+    	context.lineTo(50,75);
+    	context.fill();
+    }
+    </script>
+  </head>
+  <body onload="drawTriangle()">
+  <canvas id="mycanvas" width="500" height="500"></canvas>
+  
+  </body>
+</html>
