@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="kinetic-v5.0.1.min.js"></script>
+    <script defer="defer">
+      function loadImages(sources, callback) {
+        var images = {};
+        var loadedImages = 0;
+        var numImages = 0;
+        // get num of sources
+        for(var src in sources) {
+          numImages++;
+        }
+        for(var src in sources) {
+          images[src] = new Image();
+          images[src].onload = function() {
+            if(++loadedImages >= numImages) {
+              callback(images);
+            }
+          };
+          images[src].src = sources[src];
+        }
+      }
+      function draw(images) {
+        var stage = new Kinetic.Stage({
+          container: 'container',
+          width: 578,
+          height: 200
+        });
+        var layer = new Kinetic.Layer();
+
+        var colorPentagon = new Kinetic.RegularPolygon({
+          x: 80,
+          y: stage.getHeight() / 2,
+          sides: 5,
+          radius: 70,
+          fill: 'red',
+          stroke: 'black',
+          strokeWidth: 4,
+          draggable: true
+        });
+
+        var patternPentagon = new Kinetic.RegularPolygon({
+          x: 220,
+          y: stage.height()/2,
+          sides: 5,
+          radius: 70,
+          fillPatternImage: images.darthVader,
+          fillPatternOffset: {x:-220, y:70},
+          stroke: 'black',
+          strokeWidth: 4,
+          draggable: true
+        });
+
+        var linearGradPentagon = new Kinetic.RegularPolygon({
+          x: 360,
+          y: stage.height()/2,
+          sides: 5,
+          radius: 70,
+          fillLinearGradientStartPoint: {x:-10, y:-50},
+          fillLinearGradientEndPoint: {x:50,y:50},
+          fillLinearGradientColorStops: [0, 'red', 1, 'yellow'],
+          stroke: 'black',
+          strokeWidth: 4,
+          draggable: true
+        });
+
+        var radialGradPentagon = new Kinetic.RegularPolygon({
+          x: 500,
+          y: stage.height()/2,
+          sides: 5,
+          radius: 70,
+          fillRadialGradientEndRadius: 70,
+          fillRadialGradientColorStops: [0, 'red', 0.5, 'yellow', 1, 'blue'],
+          stroke: 'black',
+          strokeWidth: 4,
+          draggable: true
+        });
+
+        /*
+         * bind listeners
+         */
+        colorPentagon.on('mouseover', function() {
+          this.fill('blue');
+          this.draw();
+        });
+
+        colorPentagon.on('mouseout touchend', function() {
+          this.fill('red');
+          this.draw();
+        });
+
+        patternPentagon.on('mouseover touchstart', function() {
+          this.fillPatternImage(images.yoda);
+          this.fillPatternOffset({x:-100, y:70});
+          this.draw();
+        });
+
+        patternPentagon.on('mouseout touchend', function() {
+          this.fillPatternImage(images.darthVader);
+          this.fillPatternOffset({x:-220, y:70});
+          this.draw();
+        });
+
+        linearGradPentagon.on('mouseover touchstart', function() {
+          this.fillLinearGradientStartPoint({x:-50,y:-50});
+          this.fillLinearGradientEndPoint({x:50,y:50});
+          this.fillLinearGradientColorStops([0, 'green', 1, 'yellow']);
+          this.draw();
+        });
+
+        linearGradPentagon.on('mouseout touchend', function() {
+          // set multiple properties at once with setAttrs
+          this.setAttrs({
+            fillLinearGradientStartPoint: {x:-50, y:-50},
+            fillLinearGradientEndPoint: {x:50, y:50},
+            fillLinearGradientColorStops: [0, 'red', 1, 'yellow']
+          });
+          this.draw();
+        });
+
+        radialGradPentagon.on('mouseover touchstart', function() {
+          this.fillRadialGradientColorStops([0, 'red', 0.5, 'yellow', 1, 'green']);
+          this.draw();
+        });
+
+        radialGradPentagon.on('mouseout touchend', function() {
+          // set multiple properties at once with setAttrs
+          this.setAttrs({
+            fillRadialGradientStartPoint: {x:0,y:0},
+            fillRadialGradientStartRadius: 0,
+            fillRadialGradientEndPoint: {x:0,y:0},
+            fillRadialGradientEndRadius: 70,
+            fillRadialGradientColorStops: [0, 'red', 0.5, 'yellow', 1, 'blue']
+          });
+          this.draw();
+        });
+
+        layer.add(colorPentagon);
+        layer.add(patternPentagon);
+        layer.add(linearGradPentagon);
+        layer.add(radialGradPentagon);
+        stage.add(layer);
+      }
+      var sources = {
+        darthVader: 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg',
+        yoda: 'http://www.html5canvastutorials.com/demos/assets/yoda.jpg'
+      };
+
+      loadImages(sources, function(images) {
+        draw(images);
+      });
+
+    </script>
+  </body>
+</html>
