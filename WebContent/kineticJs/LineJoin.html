@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="kinetic-v5.0.1.min.js"></script>
+    <script defer="defer">
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 578,
+        height: 200
+      });
+      var layer = new Kinetic.Layer();
+
+      var triangle = new Kinetic.RegularPolygon({
+        x: stage.width()/2,
+        y: stage.height()/2,
+        sides: 3,
+        radius: 70,
+        fill: 'red',
+        stroke: 'black',
+        strokeWidth: 20,
+        lineJoin: 'miter'
+      });
+
+      triangle.on('mouseover', function() {
+        this.lineJoin('round');
+        layer.draw();
+      });
+
+      triangle.on('mouseout', function() {
+        this.lineJoin('bevel');
+        layer.draw();
+      });
+      // add the shape to the layer, and then the layer to stage
+      stage.add(layer.add(triangle));
+
+    </script>
+  </body>
+</html>
